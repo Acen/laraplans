@@ -93,13 +93,11 @@ class SubscriptionAbility
     {
         $feature_value = $this->value($feature);
 
-        if (is_null($feature_value)) {
+        if (is_null($feature_value) || $feature_value === false) {
             return false;
         }
 
-        // If value is one of the positive words configured then the
-        // feature is enabled.
-        if (in_array(strtoupper($feature_value), config('laraplans.positive_words'))) {
+        if ($feature_value) {
             return true;
         }
 
